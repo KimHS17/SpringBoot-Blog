@@ -1,6 +1,8 @@
 package blog.blogstudy.config;
 
 import blog.blogstudy.config.jwt.TokenProvider;
+import blog.blogstudy.config.oauth.OAuth2AuthorizationRequestBasedOnCookieRepository;
+import blog.blogstudy.config.oauth.OAuth2SuccessHandler;
 import blog.blogstudy.config.oauth.OAuth2UserCustomService;
 import blog.blogstudy.repository.RefreshTokenRepository;
 import blog.blogstudy.service.UserService;
@@ -60,6 +62,7 @@ public class WebOAuthSecurityConfig {
                 .authorizationRequestRepository(oAuth2AuthorizationRequestBasedOnCookieRepository())
                 .and()
                 .successHandler(oAuth2SuccessHandler()) // 인증 성공 시 실행할 핸들러
+                .userInfoEndpoint()
                 .userService(oAuth2UserCustomService);
 
         http.logout().logoutSuccessUrl("/login");
@@ -86,11 +89,11 @@ public class WebOAuthSecurityConfig {
 
     @Bean
     public OAuth2AuthorizationRequestBasedOnCookieRepository oAuth2AuthorizationRequestBasedOnCookieRepository() {
-        return new Oauth2AuthorizationRequestBasedOnCookieRepository();
+        return new OAuth2AuthorizationRequestBasedOnCookieRepository();
     }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();m 0o-
+        return new BCryptPasswordEncoder();
     }
 }
