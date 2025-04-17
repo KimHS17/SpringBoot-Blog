@@ -75,7 +75,7 @@ public class TokenApiControllerTest {
         ResultActions resultActions = mockMvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(requestBody));
-
+                        
         // then
         resultActions
                 .andExpect(status().isCreated())
